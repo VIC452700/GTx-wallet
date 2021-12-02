@@ -177,7 +177,7 @@ export default class UnlockPage extends Component {
               </button>,
             ])}
           </div>
-          <div className="unlock-page__support">
+          {/*<div className="unlock-page__support">
             {t('needHelp', [
               <a
                 href="https://support.metamask.io"
@@ -188,7 +188,7 @@ export default class UnlockPage extends Component {
                 {t('needHelpLinkText')}
               </a>,
             ])}
-          </div>
+          </div>*/}
         </div>
       </div>
     );

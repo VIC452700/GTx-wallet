@@ -76,7 +76,7 @@
     "description": "The description of the application"
   },
   "appName": {
-    "message": "MetaMask",
+    "message": "GTx Wallet",
     "description": "The name of the application"
   },
   "approve": {
@@ -90,6 +90,9 @@
   },
   "assets": {
     "message": "資產"
+  },
+  "NFTs": {
+    "message": "NFTs"
   },
   "attemptToCancel": {
     "message": "嘗試取消?"
@@ -214,6 +217,9 @@
   },
   "connectingToMainnet": {
     "message": "連線到主 Ethereum 網路"
+  },
+  "connectingToThetaMainnet": {
+    "message": "連線到主 Theta 網路"
   },
   "connectingToRinkeby": {
     "message": "連線到 Rinkeby 測試網路"

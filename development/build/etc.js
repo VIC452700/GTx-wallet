@@ -38,7 +38,7 @@ function createZipTask(target) {
   return async () => {
     await pump(
       gulp.src(`dist/${target}/**`),
-      gulpZip(`metamask-${target}-${version}.zip`),
+      gulpZip(`gtxwallet-${target}-${version}.zip`),
       gulp.dest('builds'),
     );
   };

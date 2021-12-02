@@ -11,13 +11,20 @@ import {
 import EthQuery from 'eth-query';
 import {
   RINKEBY,
-  MAINNET,
   INFURA_PROVIDER_TYPES,
   NETWORK_TYPE_RPC,
   NETWORK_TYPE_TO_ID_MAP,
+  MAINNET,
   MAINNET_CHAIN_ID,
+  MAINNET_RPC_URL,
+  MAINNET_DISPLAY_NAME,
   RINKEBY_CHAIN_ID,
   INFURA_BLOCKED_KEY,
+  THETAMAINNET_CHAIN_ID,
+  THETAMAINNET_RPC_URL,
+  THETAMAINNET_DISPLAY_NAME,
+  TFUEL_SYMBOL,
+  CHAIN_ID_TO_COLOR_MAP
 } from '../../../../shared/constants/network';
 import { SECOND } from '../../../../shared/constants/time';
 import {
@@ -33,21 +40,31 @@ const env = process.env.METAMASK_ENV;
 const fetchWithTimeout = getFetchWithTimeout(SECOND * 30);
 
 let defaultProviderConfigOpts;
-if (process.env.IN_TEST === 'true') {
+if (false && process.env.IN_TEST === 'true') {
   defaultProviderConfigOpts = {
     type: NETWORK_TYPE_RPC,
     rpcUrl: 'http://localhost:8545',
     chainId: '0x539',
     nickname: 'Localhost 8545',
   };
-} else if (process.env.METAMASK_DEBUG || env === 'test') {
+} else if (false && (process.env.METAMASK_DEBUG || env === 'test')) {
   defaultProviderConfigOpts = { type: RINKEBY, chainId: RINKEBY_CHAIN_ID };
 } else {
-  defaultProviderConfigOpts = { type: MAINNET, chainId: MAINNET_CHAIN_ID };
+  defaultProviderConfigOpts = {
+    //type: NETWORK_TYPE_RPC,
+    //rpcUrl: THETAMAINNET_RPC_URL,
+    //chainId: THETAMAINNET_CHAIN_ID,
+    //nickname: THETAMAINNET_DISPLAY_NAME,
+    type: MAINNET,
+    rpcUrl: MAINNET_RPC_URL,
+    chainId: MAINNET_CHAIN_ID,
+    nickname: MAINNET_DISPLAY_NAME,
+  };
 }
 
 const defaultProviderConfig = {
-  ticker: 'ETH',
+  //ticker: 'ETH',
+  ticker: TFUEL_SYMBOL,
   ...defaultProviderConfigOpts,
 };
 
@@ -282,6 +299,7 @@ export default class NetworkController extends EventEmitter {
       nickname,
       rpcPrefs,
     });
+    window.net_color = CHAIN_ID_TO_COLOR_MAP[chainId] ? CHAIN_ID_TO_COLOR_MAP[chainId] : '#000';
   }
 
   async setProviderType(type) {

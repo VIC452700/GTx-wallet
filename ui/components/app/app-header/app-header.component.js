@@ -107,6 +107,7 @@ export default class AppHeader extends PureComponent {
         className={classnames('app-header', {
           'app-header--back-drop': isUnlocked,
         })}
+        style={{'backgroundColor': window.net_color ? window.net_color : '#000'}}
       >
         <div className="app-header__contents">
           <MetaFoxLogo

@@ -13,6 +13,7 @@ import { useMetricEvent } from '../../../hooks/useMetricEvent';
 import { ASSET_TYPES, updateSendAsset } from '../../../ducks/send';
 import { SEND_ROUTE } from '../../../helpers/constants/routes';
 import { SEVERITIES } from '../../../helpers/constants/design-system';
+import { formatNumber } from '../../../helpers/utils/formatters';
 
 const AssetListItem = ({
   className,
@@ -95,6 +96,8 @@ const AssetListItem = ({
     dispatch,
   ]);
 
+  const fprim = formatNumber(primary);
+
   return (
     <ListItem
       className={classnames('asset-list-item', className)}
@@ -106,7 +109,7 @@ const AssetListItem = ({
           title={`${primary} ${tokenSymbol}`}
         >
           <h2>
-            <span className="asset-list-item__token-value">{primary}</span>
+            <span className="asset-list-item__token-value">{fprim}</span>
             <span className="asset-list-item__token-symbol">{tokenSymbol}</span>
           </h2>
         </button>

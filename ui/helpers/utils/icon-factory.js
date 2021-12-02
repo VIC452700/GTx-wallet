@@ -1,3 +1,4 @@
+//import contractMap from '@metamask/contract-metadata';
 import contractMap from '@metamask/contract-metadata';
 import {
   isValidHexAddress,

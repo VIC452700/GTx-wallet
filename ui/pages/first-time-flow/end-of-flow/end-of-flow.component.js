@@ -88,25 +88,25 @@ export default class EndOfFlowScreen extends PureComponent {
         <div className="end-of-flow__text-3">
           {`• ${t('endOfFlowMessage6')}`}
         </div>
-        <div className="end-of-flow__text-3">
+        {/*<div className="end-of-flow__text-3">
           •{' '}
           {t('endOfFlowMessage7', [
             <a
               target="_blank"
               key="metamaskSupportLink"
               rel="noopener noreferrer"
-              href="https://metamask.zendesk.com/hc/en-us/requests/new"
+              href="https://docs.gtx.io/en-us/requests/new"
             >
               <span className="first-time-flow__link-text">
                 {this.context.t('here')}
               </span>
             </a>,
           ])}
-        </div>
+        </div>*/}
         <div className="first-time-flow__text-block end-of-flow__text-4">
           {`*${t('endOfFlowMessage8')}`}&nbsp;
           <a
-            href="https://metamask.zendesk.com/hc/en-us/articles/360015489591-Basic-Safety-Tips"
+            href="https://docs.gtx.io/en-us/articles/360015489591-Basic-Safety-Tips"
             target="_blank"
             rel="noopener noreferrer"
           >

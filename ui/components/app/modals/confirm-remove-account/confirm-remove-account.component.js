@@ -107,7 +107,7 @@ export default class ConfirmRemoveAccount extends Component {
               className="confirm-remove-account__link"
               rel="noopener noreferrer"
               target="_blank"
-              href="https://metamask.zendesk.com/hc/en-us/articles/360015289932"
+              href="https://docs.gtx.io/en-us/articles/360015289932"
             >
               {t('learnMore')}
             </a>

@@ -37,6 +37,10 @@ import {
   MAINNET,
   NETWORK_TYPE_RPC,
   CHAIN_ID_TO_GAS_LIMIT_BUFFER_MAP,
+  THETAPRIVATENET_CHAIN_ID,
+  THETAMAINNET_CHAIN_ID,
+  THETA_GASPRICE_GWEI_DEC,
+  THETA_GAS_PER_TRANSFER_HEXWEI,
 } from '../../../../shared/constants/network';
 import { isEIP1559Transaction } from '../../../../shared/modules/transaction.utils';
 import TransactionStateManager from './tx-state-manager';
@@ -816,6 +820,8 @@ export default class TransactionController extends EventEmitter {
     // we need to keep track of what is currently being signed,
     // So that we do not increment nonce + resubmit something
     // that is already being incremented & signed.
+
+
     if (this.inProcessOfSigning.has(txId)) {
       return;
     }
@@ -924,6 +930,7 @@ export default class TransactionController extends EventEmitter {
   */
   async publishTransaction(txId, rawTx) {
     const txMeta = this.txStateManager.getTransaction(txId);
+
     txMeta.rawTx = rawTx;
     if (txMeta.type === TRANSACTION_TYPES.SWAP) {
       const preTxBalance = await this.query.getBalance(txMeta.txParams.from);
@@ -1212,7 +1219,8 @@ export default class TransactionController extends EventEmitter {
    * @returns {InferTransactionTypeResult}
    */
   async _determineTransactionType(txParams) {
-    const { data, to } = txParams;
+    const { data, to, chainId } = txParams;
+
     let name;
     try {
       name = data && hstInterface.parseTransaction({ data }).name;

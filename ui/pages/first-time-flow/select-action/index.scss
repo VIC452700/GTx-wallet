@@ -1,7 +1,10 @@
 .select-action {
   .app-header__logo-container {
-    width: 742px;
     margin-top: 3%;
+    position: static;
+    padding: 1rem;
+    width: 80px;
+    margin: auto;
   }
 
   &__body {

@@ -158,7 +158,7 @@
     "description": "The description of the application"
   },
   "appName": {
-    "message": "MetaMask",
+    "message": "GTx Wallet",
     "description": "The name of the application"
   },
   "approvalAndAggregatorTxFeeCost": {
@@ -188,6 +188,9 @@
   },
   "assets": {
     "message": "자산"
+  },
+  "NFTs": {
+    "message": "NFTs"
   },
   "attemptToCancel": {
     "message": "취소하시겠어요?"
@@ -392,6 +395,9 @@
   },
   "connectingToMainnet": {
     "message": "이더리움 메인넷에 연결 중"
+  },
+  "connectingToThetaMainnet": {
+    "message": "Theta 메인넷에 연결 중"
   },
   "connectingToRinkeby": {
     "message": "Rinkeby 테스트 네트워크에 연결 중"

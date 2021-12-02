@@ -24,7 +24,7 @@ const PageSet = ({ children }) => {
   const origin = text('Origin', 'https://metamask.github.io');
   const domainIconUrl = text(
     'Icon URL',
-    'https://metamask.github.io/test-dapp/metamask-fox.svg',
+    'https://metamask.github.io/test-dapp/g-logo.svg',
   );
 
   const currentNetworkTxList = useSelector(currentNetworkTxListSelector);

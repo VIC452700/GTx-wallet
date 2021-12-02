@@ -73,7 +73,7 @@
     "description": "The description of the application"
   },
   "appName": {
-    "message": "MetaMask",
+    "message": "GTx Wallet",
     "description": "The name of the application"
   },
   "approve": {
@@ -205,6 +205,9 @@
   },
   "connectingToMainnet": {
     "message": "Se conectează la rețeaua Ethereum principală"
+  },
+  "connectingToThetaMainnet": {
+    "message": "Se conectează la rețeaua Theta principală"
   },
   "connectingToRinkeby": {
     "message": "Se conectează la Rețeaua de test Rinkeby"

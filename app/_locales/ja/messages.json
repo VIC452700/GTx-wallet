@@ -158,7 +158,7 @@
     "description": "The description of the application"
   },
   "appName": {
-    "message": "MetaMask",
+    "message": "GTx Wallet",
     "description": "The name of the application"
   },
   "approvalAndAggregatorTxFeeCost": {
@@ -188,6 +188,9 @@
   },
   "assets": {
     "message": "アセット"
+  },
+  "NFTs": {
+    "message": "NFTs"
   },
   "attemptToCancel": {
     "message": "キャンセルを試みますか?"
@@ -392,6 +395,9 @@
   },
   "connectingToMainnet": {
     "message": "イーサリアム メインネットへの接続"
+  },
+  "connectingToThetaMainnet": {
+    "message": "Theta メインネットへの接続"
   },
   "connectingToRinkeby": {
     "message": "Rinkeby テスト ネットワークへの接続"

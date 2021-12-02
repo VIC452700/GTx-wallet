@@ -28,6 +28,7 @@ import { getUnconnectedAccountAlertEnabledness } from '../ducks/metamask/metamas
 import { LISTED_CONTRACT_ADDRESSES } from '../../shared/constants/tokens';
 import { toChecksumHexAddress } from '../../shared/modules/hexstring-utils';
 import * as actionConstants from './actionConstants';
+import { CHAIN_ID_TO_COLOR_MAP } from '../../shared/constants/network';
 
 let background = null;
 let promisifiedBackground = null;
@@ -1242,7 +1243,7 @@ export function addToken(
 ) {
   return (dispatch) => {
     if (!address) {
-      throw new Error('MetaMask - Cannot add token without address');
+      throw new Error('GTx Wallet - Cannot add token without address');
     }
     if (!dontShowLoadingIndicator) {
       dispatch(showLoadingIndication());
@@ -1529,10 +1530,11 @@ export function editRpc(
   };
 }
 
-export function setRpcTarget(newRpc, chainId, ticker = 'ETH', nickname) {
+export function setRpcTarget(newRpc, chainId, ticker = 'ETH', nickname = '', rpcPrefs = {}) {
+  window.net_color = CHAIN_ID_TO_COLOR_MAP[chainId] ? CHAIN_ID_TO_COLOR_MAP[chainId] : '#000';
   return async (dispatch) => {
     log.debug(
-      `background.setRpcTarget: ${newRpc} ${chainId} ${ticker} ${nickname}`,
+      `background.setRpcTarget: ${newRpc} ${chainId} ${ticker} ${nickname} ${rpcPrefs}`,
     );
 
     try {
@@ -1541,6 +1543,7 @@ export function setRpcTarget(newRpc, chainId, ticker = 'ETH', nickname) {
         chainId,
         ticker,
         nickname || newRpc,
+        rpcPrefs,
       );
     } catch (error) {
       log.error(error);

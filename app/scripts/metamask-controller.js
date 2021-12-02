@@ -28,7 +28,7 @@ import {
   TokenListController,
 } from '@metamask/controllers';
 import { TRANSACTION_STATUSES } from '../../shared/constants/transaction';
-import { MAINNET_CHAIN_ID } from '../../shared/constants/network';
+import { MAINNET_CHAIN_ID, TFUEL_SYMBOL, THETAMAINNET_CHAIN_ID, THETAMAINNET_DISPLAY_NAME, THETAMAINNET_EXPLORER_URL, THETAMAINNET_RPC_URL } from '../../shared/constants/network';
 import { UI_NOTIFICATIONS } from '../../shared/notifications';
 import { toChecksumHexAddress } from '../../shared/modules/hexstring-utils';
 import { MILLISECOND } from '../../shared/constants/time';
@@ -70,6 +70,7 @@ import seedPhraseVerifier from './lib/seed-phrase-verifier';
 import MetaMetricsController from './controllers/metametrics';
 import { segment } from './lib/segment';
 import createMetaRPCHandler from './lib/createMetaRPCHandler';
+import { conversionLessThan } from '../../shared/modules/conversion.utils';
 
 export const METAMASK_CONTROLLER_EVENTS = {
   // Fired after state changes that impact the extension badge (unapproved msg count)
@@ -2791,13 +2792,14 @@ export default class MetamaskController extends EventEmitter {
         nickname,
         rpcPrefs,
       );
-      await this.preferencesController.addToFrequentRpcList(
-        rpcUrl,
-        chainId,
-        ticker,
-        nickname,
-        rpcPrefs,
-      );
+      if (chainId != THETAMAINNET_CHAIN_ID)
+        await this.preferencesController.addToFrequentRpcList(
+          rpcUrl,
+          chainId,
+          ticker,
+          nickname,
+          rpcPrefs,
+        );
     }
     return rpcUrl;
   }

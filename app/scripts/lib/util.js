@@ -150,7 +150,7 @@ function bnToHex(inputBn) {
   return addHexPrefix(inputBn.toString(16));
 }
 
-function getChainType(chainId) {
+function getChainType(chainId) { //... 
   if (chainId === MAINNET_CHAIN_ID) {
     return 'mainnet';
   } else if (TEST_CHAINS.includes(chainId)) {

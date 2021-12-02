@@ -377,7 +377,9 @@ class AddToken extends Component {
   }
 
   renderTabs() {
-    const { showSearchTab } = this.props;
+    //const { showSearchTab } = this.props;
+    //...
+    const showSearchTab = true;
     const tabs = [];
 
     if (showSearchTab) {

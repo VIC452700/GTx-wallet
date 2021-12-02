@@ -34,7 +34,7 @@ async function start() {
   const platforms = ['chrome', 'firefox', 'opera'];
   const buildLinks = platforms
     .map((platform) => {
-      const url = `${BUILD_LINK_BASE}/builds/metamask-${platform}-${VERSION}.zip`;
+      const url = `${BUILD_LINK_BASE}/builds/gtxwallet-${platform}-${VERSION}.zip`;
       return `<a href="${url}">${platform}</a>`;
     })
     .join(', ');

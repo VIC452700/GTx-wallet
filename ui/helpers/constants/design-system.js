@@ -31,6 +31,7 @@ export const COLORS = {
   KOVAN: 'kovan',
   RINKEBY: 'rinkeby',
   GOERLI: 'goerli',
+  THETAMAINNET: 'theta_mainnet',
   TRANSPARENT: 'transparent',
 };
 

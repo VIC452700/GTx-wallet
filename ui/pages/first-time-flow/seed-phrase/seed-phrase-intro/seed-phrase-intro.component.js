@@ -43,7 +43,7 @@ export default function SeedPhraseIntro() {
           >
             {t('seedPhraseIntroTitleCopy')}
           </Typography>
-          <Box marginBottom={4}>
+          {/*<Box marginBottom={4}>
             <video controls>
               <source
                 type="video/webm"
@@ -57,7 +57,7 @@ export default function SeedPhraseIntro() {
                 src="./images/videos/recovery-onboarding/subtitles-en.vtt"
               />
             </video>
-          </Box>
+          </Box>*/}
           <Box width={BLOCK_SIZES.ONE_THIRD}>
             <Button type="primary" onClick={handleNextStep}>
               {t('next')}

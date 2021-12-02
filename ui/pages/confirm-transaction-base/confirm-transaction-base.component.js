@@ -253,7 +253,7 @@ export default class ConfirmTransactionBase extends Component {
       actionKey,
       txData: { origin },
       methodData = {},
-    } = this.props;
+    } = this.props;  
 
     this.context.metricsEvent({
       eventOpts: {
@@ -871,14 +871,17 @@ export default class ConfirmTransactionBase extends Component {
       requestsWaitingText,
     } = this.getNavigateTxData();
 
+    let typeEx = !type && txData.type ? txData.type : type;
+
     let functionType = getMethodName(name);
-    if (!functionType) {
-      if (type) {
-        functionType = getTransactionTypeTitle(t, type);
+    if (!functionType || !functionType.length) {
+      if (typeEx) {
+        functionType = getTransactionTypeTitle(t, typeEx);
       } else {
         functionType = t('contractInteraction');
       }
     }
+
     return (
       <ConfirmPageContainer
         fromName={fromName}

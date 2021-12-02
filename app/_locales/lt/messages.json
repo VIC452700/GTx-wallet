@@ -206,6 +206,9 @@
   "connectingToMainnet": {
     "message": "Jungiamasi prie pagrindinio „Ethereum“ tinklo"
   },
+  "connectingToThetaMainnet": {
+    "message": "Jungiamasi prie pagrindinio „Theta“ tinklo"
+  },
   "connectingToRinkeby": {
     "message": "Jungiamasi prie „Rinkeby“ bandomojo tinklo"
   },

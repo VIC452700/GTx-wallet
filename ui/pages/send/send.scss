@@ -5,7 +5,7 @@
     position: relative;
     display: flex;
     justify-content: center;
-    background-color: $Grey-000;
+    background-color: $BG;
     border-bottom: none;
     padding: 14px 0 3px 0;
 
@@ -38,7 +38,7 @@
     margin: 0;
     padding: 0.5rem;
     flex: 0 0 auto;
-    background-color: $Grey-000;
+    background-color: $BG;
     border-bottom: 1px solid $alto;
   }
 
@@ -98,7 +98,7 @@
     &__group-label {
       @include H8;
 
-      background-color: $Grey-000;
+      background-color: $BG;
       color: $Grey-600;
       padding: 0.5rem 1rem;
       border-bottom: 1px solid $alto;

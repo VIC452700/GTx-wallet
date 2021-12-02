@@ -326,7 +326,7 @@ export default class ImportWithSeedPhrase extends PureComponent {
               <a
                 onClick={(e) => e.stopPropagation()}
                 key="first-time-flow__link-text"
-                href="https://metamask.io/terms.html"
+                href="https://gtx.io/wallet/terms"
                 target="_blank"
                 rel="noopener noreferrer"
               >

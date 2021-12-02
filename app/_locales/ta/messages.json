@@ -79,6 +79,9 @@
   "connectingToMainnet": {
     "message": "முக்கிய எதெரியும் நெட்வொர்க் இணைக்கும்"
   },
+  "connectingToThetaMainnet": {
+    "message": "முக்கிய எதெரியும் நெட்வொர்க் Theta"
+  },
   "connectingToRinkeby": {
     "message": "ரிங்கெப்ய டெஸ்ட் நெட்வொர்க்குடன் இணைக்கிறது"
   },

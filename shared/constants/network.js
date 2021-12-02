@@ -1,9 +1,13 @@
+import { ETHEREUM } from "./swaps";
+
 export const ROPSTEN = 'ropsten';
 export const RINKEBY = 'rinkeby';
 export const KOVAN = 'kovan';
 export const MAINNET = 'mainnet';
 export const GOERLI = 'goerli';
 export const NETWORK_TYPE_RPC = 'rpc';
+export const THETAMAINNET = 'theta_mainnet';
+export const THETAPRIVATENET = 'theta_privatenet';
 
 export const MAINNET_NETWORK_ID = '1';
 export const ROPSTEN_NETWORK_ID = '3';
@@ -11,6 +15,8 @@ export const RINKEBY_NETWORK_ID = '4';
 export const GOERLI_NETWORK_ID = '5';
 export const KOVAN_NETWORK_ID = '42';
 export const LOCALHOST_NETWORK_ID = '1337';
+export const THETAMAINNET_NETWORK_ID = '361';
+export const THETAPRIVATENET_NETWORK_ID = '366';
 
 export const MAINNET_CHAIN_ID = '0x1';
 export const ROPSTEN_CHAIN_ID = '0x3';
@@ -22,7 +28,8 @@ export const BSC_CHAIN_ID = '0x38';
 export const OPTIMISM_CHAIN_ID = '0xa';
 export const OPTIMISM_TESTNET_CHAIN_ID = '0x45';
 export const POLYGON_CHAIN_ID = '0x89';
-
+export const THETAMAINNET_CHAIN_ID = '0x169';
+export const THETAPRIVATENET_CHAIN_ID = '0x16e';
 /**
  * The largest possible chain ID we can handle.
  * Explanation: https://gist.github.com/rekmarks/a47bd5f2525936c4b8eee31a16345553
@@ -34,6 +41,11 @@ export const RINKEBY_DISPLAY_NAME = 'Rinkeby';
 export const KOVAN_DISPLAY_NAME = 'Kovan';
 export const MAINNET_DISPLAY_NAME = 'Ethereum Mainnet';
 export const GOERLI_DISPLAY_NAME = 'Goerli';
+export const THETAMAINNET_DISPLAY_NAME = "Theta Mainnet";
+export const THETAPRIVATENET_DISPLAY_NAME = "Theta Privatenet";
+
+export const THETA_GASPRICE_GWEI_DEC = 4000;
+export const THETA_GAS_PER_TRANSFER_HEXWEI = '0x124f8'; //75,000 gas = 0.3 TFUEL at above price
 
 const infuraProjectId = process.env.INFURA_PROJECT_ID;
 const getRpcUrl = (network) =>
@@ -44,35 +56,51 @@ export const RINKEBY_RPC_URL = getRpcUrl('rinkeby');
 export const KOVAN_RPC_URL = getRpcUrl('kovan');
 export const MAINNET_RPC_URL = getRpcUrl('mainnet');
 export const GOERLI_RPC_URL = getRpcUrl('goerli');
+export const THETAMAINNET_RPC_URL = 'https://eth.gpool.io/rpc'; //'https://eth-rpc-api.thetatoken.org/rpc';
+export const THETAPRIVATENET_RPC_URL = 'http://137.184.104.192:18888/rpc';
+
+
+export const THETAMAINNET_EXPLORER_URL = 'https://explorer.thetatoken.org';
 
 export const ETH_SYMBOL = 'ETH';
 export const WETH_SYMBOL = 'WETH';
 export const TEST_ETH_SYMBOL = 'TESTETH';
 export const BNB_SYMBOL = 'BNB';
 export const MATIC_SYMBOL = 'MATIC';
+export const THETA_SYMBOL = 'THETA';
+export const TFUEL_SYMBOL = 'TFUEL';
 
 export const ETH_TOKEN_IMAGE_URL = './images/eth_logo.svg';
 export const TEST_ETH_TOKEN_IMAGE_URL = './images/black-eth-logo.svg';
 export const BNB_TOKEN_IMAGE_URL = './images/bnb.png';
 export const MATIC_TOKEN_IMAGE_URL = './images/matic-token.png';
+export const THETA_TOKEN_IMAGE_URL = './images/theta-coin.svg';
+export const TFUEL_TOKEN_IMAGE_URL = './images/tfuel-coin.svg';
 
-export const INFURA_PROVIDER_TYPES = [ROPSTEN, RINKEBY, KOVAN, MAINNET, GOERLI];
+export const INFURA_PROVIDER_TYPES = [
+  //ROPSTEN, RINKEBY, KOVAN,
+  MAINNET, 
+  //GOERLI, 
+  //THETAPRIVATENET
+]; //menu click expects
 
 export const TEST_CHAINS = [
-  ROPSTEN_CHAIN_ID,
+  /*ROPSTEN_CHAIN_ID,
   RINKEBY_CHAIN_ID,
   GOERLI_CHAIN_ID,
   KOVAN_CHAIN_ID,
+  THETAPRIVATENET_CHAIN_ID,*/
+  //THETAMAINNET_CHAIN_ID, //this does not make it clickable
 ];
 
 /**
  * Map of all build-in Infura networks to their network and chain IDs.
  */
 export const NETWORK_TYPE_TO_ID_MAP = {
-  [ROPSTEN]: { networkId: ROPSTEN_NETWORK_ID, chainId: ROPSTEN_CHAIN_ID },
+/*  [ROPSTEN]: { networkId: ROPSTEN_NETWORK_ID, chainId: ROPSTEN_CHAIN_ID },
   [RINKEBY]: { networkId: RINKEBY_NETWORK_ID, chainId: RINKEBY_CHAIN_ID },
   [KOVAN]: { networkId: KOVAN_NETWORK_ID, chainId: KOVAN_CHAIN_ID },
-  [GOERLI]: { networkId: GOERLI_NETWORK_ID, chainId: GOERLI_CHAIN_ID },
+  [GOERLI]: { networkId: GOERLI_NETWORK_ID, chainId: GOERLI_CHAIN_ID },*/
   [MAINNET]: { networkId: MAINNET_NETWORK_ID, chainId: MAINNET_CHAIN_ID },
 };
 
@@ -82,18 +110,24 @@ export const NETWORK_TO_NAME_MAP = {
   [KOVAN]: KOVAN_DISPLAY_NAME,
   [MAINNET]: MAINNET_DISPLAY_NAME,
   [GOERLI]: GOERLI_DISPLAY_NAME,
+  [THETAPRIVATENET]: THETAPRIVATENET_DISPLAY_NAME,
+  [THETAMAINNET]: THETAMAINNET_DISPLAY_NAME,
 
   [ROPSTEN_NETWORK_ID]: ROPSTEN_DISPLAY_NAME,
   [RINKEBY_NETWORK_ID]: RINKEBY_DISPLAY_NAME,
   [KOVAN_NETWORK_ID]: KOVAN_DISPLAY_NAME,
   [GOERLI_NETWORK_ID]: GOERLI_DISPLAY_NAME,
   [MAINNET_NETWORK_ID]: MAINNET_DISPLAY_NAME,
+  [THETAPRIVATENET_NETWORK_ID]: THETAPRIVATENET_DISPLAY_NAME,
+  [THETAMAINNET_NETWORK_ID]: THETAMAINNET_DISPLAY_NAME,
 
   [ROPSTEN_CHAIN_ID]: ROPSTEN_DISPLAY_NAME,
   [RINKEBY_CHAIN_ID]: RINKEBY_DISPLAY_NAME,
   [KOVAN_CHAIN_ID]: KOVAN_DISPLAY_NAME,
   [GOERLI_CHAIN_ID]: GOERLI_DISPLAY_NAME,
   [MAINNET_CHAIN_ID]: MAINNET_DISPLAY_NAME,
+  [THETAPRIVATENET_CHAIN_ID]: THETAPRIVATENET_DISPLAY_NAME,
+  [THETAMAINNET_CHAIN_ID]: THETAMAINNET_DISPLAY_NAME,
 };
 
 export const CHAIN_ID_TO_TYPE_MAP = Object.entries(
@@ -109,6 +143,8 @@ export const CHAIN_ID_TO_RPC_URL_MAP = {
   [KOVAN_CHAIN_ID]: KOVAN_RPC_URL,
   [GOERLI_CHAIN_ID]: GOERLI_RPC_URL,
   [MAINNET_CHAIN_ID]: MAINNET_RPC_URL,
+  [THETAPRIVATENET_CHAIN_ID]: THETAPRIVATENET_RPC_URL,
+  [THETAMAINNET_CHAIN_ID]: THETAMAINNET_RPC_URL,
 };
 
 export const CHAIN_ID_TO_NETWORK_ID_MAP = Object.values(
@@ -118,10 +154,17 @@ export const CHAIN_ID_TO_NETWORK_ID_MAP = Object.values(
   return chainIdToNetworkIdMap;
 }, {});
 
+export const CHAIN_ID_TO_COLOR_MAP = {
+  [THETAMAINNET_CHAIN_ID]: '#29b6af',
+  [MAINNET_CHAIN_ID]: '#454a75',
+};
+
 export const NATIVE_CURRENCY_TOKEN_IMAGE_MAP = {
   [ETH_SYMBOL]: ETH_TOKEN_IMAGE_URL,
   [TEST_ETH_SYMBOL]: TEST_ETH_TOKEN_IMAGE_URL,
   [BNB_SYMBOL]: BNB_TOKEN_IMAGE_URL,
+  [THETA_SYMBOL]: THETA_TOKEN_IMAGE_URL,
+  [TFUEL_SYMBOL]: TFUEL_TOKEN_IMAGE_URL,
 };
 
 export const INFURA_BLOCKED_KEY = 'countryBlocked';

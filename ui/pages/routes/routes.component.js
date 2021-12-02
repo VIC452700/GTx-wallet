@@ -36,6 +36,7 @@ import Asset from '../asset';
 import {
   ADD_TOKEN_ROUTE,
   ASSET_ROUTE,
+  NFT_ROUTE,
   CONFIRM_ADD_SUGGESTED_TOKEN_ROUTE,
   CONFIRM_ADD_TOKEN_ROUTE,
   CONFIRM_TRANSACTION_ROUTE,
@@ -171,6 +172,7 @@ export default class Routes extends Component {
           component={PermissionsConnect}
         />
         <Authenticated path={`${ASSET_ROUTE}/:asset`} component={Asset} />
+        <Authenticated path={`${NFT_ROUTE}/:asset`} component={Asset} />
         <Authenticated path={DEFAULT_ROUTE} component={Home} />
       </Switch>
     );
@@ -344,7 +346,7 @@ export default class Routes extends Component {
           frequentRpcListDetail={frequentRpcListDetail}
         />
         <AccountMenu />
-        <div className="main-container-wrapper">
+        <div className="main-container-wrapper" style={{'background-color': window.net_color ? window.net_color : '#000'}}>
           {isLoading && <Loading loadingMessage={loadMessage} />}
           {!isLoading && isNetworkLoading && <LoadingNetwork />}
           {this.renderRoutes()}
@@ -377,6 +379,8 @@ export default class Routes extends Component {
     switch (provider.type) {
       case 'mainnet':
         return this.context.t('connectingToMainnet');
+      case 'theta_mainnet':
+        return this.context.t('connectingToThetaMainnet');
       case 'ropsten':
         return this.context.t('connectingToRopsten');
       case 'kovan':

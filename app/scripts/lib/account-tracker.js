@@ -19,6 +19,7 @@ import {
   RINKEBY_CHAIN_ID,
   ROPSTEN_CHAIN_ID,
   KOVAN_CHAIN_ID,
+  THETAMAINNET_CHAIN_ID,
 } from '../../../shared/constants/network';
 
 import {
@@ -208,12 +209,13 @@ export default class AccountTracker {
     const chainId = this.getCurrentChainId();
 
     switch (chainId) {
-      case MAINNET_CHAIN_ID:
+      case MAINNET_CHAIN_ID: //ethereum
         await this._updateAccountsViaBalanceChecker(
           addresses,
           SINGLE_CALL_BALANCES_ADDRESS,
         );
         break;
+      //... this won't work for theta. need a contract for that
 
       case RINKEBY_CHAIN_ID:
         await this._updateAccountsViaBalanceChecker(

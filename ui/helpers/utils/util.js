@@ -349,6 +349,7 @@ export function constructTxParams({
     txParams.value = amount;
     txParams.to = to;
   }
+
   return addHexPrefixToObjectValues(txParams);
 }
 

@@ -22,6 +22,10 @@ import { setupMultiplex } from './lib/stream-utils';
 import { getEnvironmentType } from './lib/util';
 import metaRPCClientFactory from './lib/metaRPCClientFactory';
 
+import * as actions from '../../ui/store/actions';
+import * as Network from '../../shared/constants/network';
+import {NetworkController} from '../../app/scripts/controllers/network/network';
+
 start().catch(log.error);
 
 async function start() {
@@ -40,7 +44,7 @@ async function start() {
 
   function displayCriticalError(container, err) {
     container.innerHTML =
-      '<div class="critical-error">The MetaMask app failed to load: please open and close MetaMask again to restart.</div>';
+      '<div class="critical-error">The GTx Wallet app failed to load: please open and close GTx Wallet again to restart.</div>';
     container.style.height = '80px';
     log.error(err.stack);
     throw err;
@@ -55,12 +59,18 @@ async function start() {
       }
 
       const state = store.getState();
+
+      // initial coloring
+      const chainId = state.metamask.provider.chainId;
+      window.net_color = Network.CHAIN_ID_TO_COLOR_MAP[chainId] ? Network.CHAIN_ID_TO_COLOR_MAP[chainId] : '#000';      
+      
       const { metamask: { completedOnboarding } = {} } = state;
 
       if (!completedOnboarding && windowType !== ENVIRONMENT_TYPE_FULLSCREEN) {
         global.platform.openExtensionInBrowser();
       }
     });
+    
   }
 }
 

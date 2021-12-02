@@ -153,7 +153,7 @@ export default function NewAccount({ onSubmit }) {
                 <a
                   onClick={(e) => e.stopPropagation()}
                   key="new-account__link-text"
-                  href="https://metamask.io/terms.html"
+                  href="https://gtx.io/wallet/terms"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

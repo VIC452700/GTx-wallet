@@ -6,6 +6,9 @@ import { MAINNET_CHAIN_ID } from '../../../shared/constants/network';
 import { SINGLE_CALL_BALANCES_ADDRESS } from '../constants/contracts';
 import { MINUTE } from '../../../shared/constants/time';
 
+import { NETWORK_EVENTS } from '../../../app/scripts/controllers/network/network';
+import * as actions from '../../../ui/store/actions';
+
 // By default, poll every 3 minutes
 const DEFAULT_INTERVAL = MINUTE * 3;
 
@@ -38,8 +41,10 @@ export default class DetectTokensController {
     if (!this.isActive) {
       return;
     }
+
+    if (!this._network || !this._network.store) return
     if (this._network.store.getState().provider.chainId !== MAINNET_CHAIN_ID) {
-      return;
+      return
     }
 
     const tokensToDetect = [];
@@ -64,7 +69,6 @@ export default class DetectTokensController {
       );
       return;
     }
-
     tokensToDetect.forEach((tokenAddress, index) => {
       const balance = result[index];
       if (balance && !balance.isZero()) {

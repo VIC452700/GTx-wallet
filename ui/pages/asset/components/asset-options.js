@@ -7,16 +7,31 @@ import { Menu, MenuItem } from '../../../components/ui/menu';
 const AssetOptions = ({
   onRemove,
   onClickBlockExplorer,
+  onClickThetaScan,
   onViewAccountDetails,
   tokenSymbol,
   isNativeAsset,
   isEthNetwork,
+  isThetaNetwork,
 }) => {
   const t = useContext(I18nContext);
   const [assetOptionsButtonElement, setAssetOptionsButtonElement] = useState(
     null,
   );
   const [assetOptionsOpen, setAssetOptionsOpen] = useState(false);
+
+  const thetaScan = isThetaNetwork && onClickThetaScan ?
+    <MenuItem
+      iconClassName="fas fa-external-link-alt asset-options__icon"
+      data-testid="asset-options__etherscan"
+      onClick={() => {
+        setAssetOptionsOpen(false);
+        onClickThetaScan();
+      }}
+    >
+      View on ThetaScan{/* ... add translation */}
+    </MenuItem>
+    : null;
 
   return (
     <>
@@ -52,6 +67,7 @@ const AssetOptions = ({
           >
             {isEthNetwork ? t('viewOnEtherscan') : t('viewinExplorer')}
           </MenuItem>
+          {thetaScan}
           {isNativeAsset ? null : (
             <MenuItem
               iconClassName="fas fa-trash-alt asset-options__icon"

@@ -16,22 +16,29 @@ import { useNewMetricEvent } from '../../../hooks/useMetricEvent';
 
 import AssetNavigation from './asset-navigation';
 import AssetOptions from './asset-options';
+import * as Network from '../../../../shared/constants/network';
 
 export default function TokenAsset({ token }) {
   const dispatch = useDispatch();
   const chainId = useSelector(getCurrentChainId);
+  const isThetaNetwork = chainId==Network.THETAMAINNET_CHAIN_ID;
   const rpcPrefs = useSelector(getRpcPrefsForCurrentProvider);
   const selectedIdentity = useSelector(getSelectedIdentity);
   const selectedAccountName = selectedIdentity.name;
   const selectedAddress = selectedIdentity.address;
   const history = useHistory();
-  const tokenTrackerLink = getTokenTrackerLink(
-    token.address,
-    chainId,
-    null,
-    selectedAddress,
-    rpcPrefs,
-  );
+  const tokenTrackerLink =  isThetaNetwork 
+    ? 'https://explorer.thetatoken.org/account/'+token.address
+    : getTokenTrackerLink(
+        token.address,
+        chainId,
+        null,
+        selectedAddress,
+        rpcPrefs,
+    );
+  const thetascanTrackerLink = token.isERC721 
+    ? 'http://www.thetascan.io/tokens/721/contracts/?data='+token.address
+    : 'http://www.thetascan.io/contracts/?data='+token.address;
 
   const blockExplorerLinkClickedEvent = useNewMetricEvent({
     category: 'Navigation',
@@ -57,9 +64,13 @@ export default function TokenAsset({ token }) {
               dispatch(showModal({ name: 'HIDE_TOKEN_CONFIRMATION', token }))
             }
             isEthNetwork={!rpcPrefs.blockExplorerUrl}
+            isThetaNetwork={isThetaNetwork}
             onClickBlockExplorer={() => {
               blockExplorerLinkClickedEvent();
               global.platform.openTab({ url: tokenTrackerLink });
+            }}
+            onClickThetaScan={() => {
+              global.platform.openTab({ url: thetascanTrackerLink });
             }}
             onViewAccountDetails={() => {
               dispatch(showModal({ name: 'ACCOUNT_DETAILS' }));

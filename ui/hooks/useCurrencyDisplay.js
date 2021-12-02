@@ -11,6 +11,7 @@ import {
 } from '../ducks/metamask/metamask';
 
 import { conversionUtil } from '../../shared/modules/conversion.utils';
+import { formatNumber } from '../helpers/utils/formatters';
 
 /**
  * Defines the shape of the options parameter for useCurrencyDisplay
@@ -95,8 +96,9 @@ export function useCurrencyDisplay(
     suffix = opts.suffix || currency?.toUpperCase();
   }
 
+  const fval = formatNumber(value);
   return [
-    `${prefix || ''}${value}${suffix ? ` ${suffix}` : ''}`,
-    { prefix, value, suffix },
+    `${prefix || ''}${fval}${suffix ? ` ${suffix}` : ''}`,
+    { prefix, value: fval, suffix },
   ];
 }

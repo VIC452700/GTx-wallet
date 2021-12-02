@@ -15,6 +15,7 @@ import {
 } from './helpers/utils/i18n-helper';
 import switchDirection from './helpers/utils/switch-direction';
 import {
+  conversionRateSelector,
   getPermittedAccountsForCurrentTab,
   getSelectedAddress,
 } from './selectors';
@@ -25,6 +26,8 @@ import {
 } from './ducks/metamask/metamask';
 import Root from './pages';
 import txHelper from './helpers/utils/tx-helper';
+
+import * as Network from '../shared/constants/network';
 
 log.setLevel(global.METAMASK_DEBUG ? 'debug' : 'warn');
 
@@ -37,6 +40,7 @@ export default function launchMetamaskUi(opts, cb) {
       cb(err);
       return;
     }
+    
     startApp(metamaskState, backgroundConnection, opts).then((store) => {
       setupDebuggingHelpers(store);
       cb(null, store);

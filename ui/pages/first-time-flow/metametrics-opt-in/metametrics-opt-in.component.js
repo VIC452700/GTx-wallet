@@ -172,7 +172,7 @@ export default class MetaMetricsOptIn extends Component {
               {t('gdprMessage', [
                 <a
                   key="metametrics-bottom-text-wrapper"
-                  href="https://metamask.io/privacy.html"
+                  href="https://gtx.io/wallet/privacy"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

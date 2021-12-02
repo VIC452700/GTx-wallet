@@ -4,6 +4,7 @@ import { ASSET_ROUTE, ADD_TOKEN_ROUTE } from '../../helpers/constants/routes';
 import Button from '../../components/ui/button';
 import Identicon from '../../components/ui/identicon';
 import TokenBalance from '../../components/ui/token-balance';
+//import { TOKEN_IMAGES } from '../../../shared/constants/network';
 
 export default class ConfirmAddToken extends Component {
   static contextTypes = {
@@ -63,6 +64,7 @@ export default class ConfirmAddToken extends Component {
             <div className="confirm-add-token__token-list">
               {Object.entries(pendingTokens).map(([address, token]) => {
                 const { name, symbol } = token;
+                //const image = TOKEN_IMAGES[address.toLowerCase()]; //... should use assetImages from state instead in case of additions
 
                 return (
                   <div
@@ -74,6 +76,7 @@ export default class ConfirmAddToken extends Component {
                         className="confirm-add-token__token-icon"
                         diameter={48}
                         address={address}
+                        //image={image}
                       />
                       <div className="confirm-add-token__name">
                         {this.getTokenName(name, symbol)}

@@ -18,6 +18,8 @@ import ColorIndicator from '../../ui/color-indicator';
 import { COLORS, SIZES } from '../../../helpers/constants/design-system';
 import { Dropdown, DropdownMenuItem } from './dropdown';
 
+import * as Network from '../../../../shared/constants/network'
+
 // classes from nodes of the toggle element.
 const notToggleElementClassnames = [
   'menu-icon',
@@ -47,8 +49,8 @@ function mapDispatchToProps(dispatch) {
     setProviderType: (type) => {
       dispatch(actions.setProviderType(type));
     },
-    setRpcTarget: (target, chainId, ticker, nickname) => {
-      dispatch(actions.setRpcTarget(target, chainId, ticker, nickname));
+    setRpcTarget: (target, chainId, ticker, nickname, rpcPrefs) => {
+      dispatch(actions.setRpcTarget(target, chainId, ticker, nickname, rpcPrefs));
     },
     hideNetworkDropdown: () => dispatch(actions.hideNetworkDropdown()),
     setNetworksTabAddMode: (isInAddMode) => {
@@ -104,6 +106,9 @@ class NetworkDropdown extends Component {
     } = this.props;
     const { metricsEvent } = this.context;
 
+    const chainId =  newProviderType === 'mainnet' ? Network.MAINNET_CHAIN_ID : null;
+    window.net_color = Network.CHAIN_ID_TO_COLOR_MAP[chainId] ? Network.CHAIN_ID_TO_COLOR_MAP[chainId] : '#000';
+
     metricsEvent({
       eventOpts: {
         category: 'Navigation',
@@ -123,6 +128,7 @@ class NetworkDropdown extends Component {
 
     return reversedRpcListDetail.map((entry) => {
       const { rpcUrl, chainId, ticker = 'ETH', nickname = '' } = entry;
+      if (chainId === Network.THETAMAINNET_CHAIN_ID) return;
       const isCurrentRpcTarget =
         provider.type === NETWORK_TYPE_RPC && rpcUrl === provider.rpcUrl;
 
@@ -195,6 +201,8 @@ class NetworkDropdown extends Component {
       name = this.context.t('rinkeby');
     } else if (providerName === 'goerli') {
       name = this.context.t('goerli');
+    } else if (providerName === 'theta_mainnet') {
+      name = this.context.t('theta_mainnet');
     } else {
       name = provider.nickname || this.context.t('unknownNetwork');
     }
@@ -204,16 +212,33 @@ class NetworkDropdown extends Component {
 
   renderNetworkEntry(network) {
     const {
-      provider: { type: providerType },
+      provider: { type: providerType, rpcUrl: rpcUrl },
     } = this.props;
+
     return (
       <DropdownMenuItem
         key={network}
         closeMenu={this.props.hideNetworkDropdown}
-        onClick={() => this.handleClick(network)}
+        onClick={() => {
+          switch (network){
+            case Network.THETAMAINNET:
+              this.handleClick(network);
+              this.props.setRpcTarget(
+                Network.THETAMAINNET_RPC_URL, 
+                Network.THETAMAINNET_CHAIN_ID, 
+                Network.TFUEL_SYMBOL,
+                Network.THETAMAINNET_DISPLAY_NAME,
+                {blockExplorerUrl: Network.THETAMAINNET_EXPLORER_URL},
+              );
+              break;
+            default: this.handleClick(network)
+          }
+        }}
         style={DROP_DOWN_MENU_ITEM_STYLE}
       >
-        {providerType === network ? (
+        {providerType === network
+            || (network === Network.THETAMAINNET && providerType === NETWORK_TYPE_RPC && rpcUrl === Network.THETAMAINNET_RPC_URL) 
+        ? (
           <i className="fa fa-check" />
         ) : (
           <div className="network-check__transparent">✓</div>
@@ -244,6 +269,8 @@ class NetworkDropdown extends Component {
     } = this.props;
     const rpcListDetail = this.props.frequentRpcListDetail;
     const isOpen = this.props.networkDropdownOpen;
+
+    window.setRpcTarget = this.props.setRpcTarget;
 
     return (
       <Dropdown
@@ -281,11 +308,8 @@ class NetworkDropdown extends Component {
             {this.context.t('defaultNetwork')}
           </div>
         </div>
-        {this.renderNetworkEntry('mainnet')}
-        {this.renderNetworkEntry('ropsten')}
-        {this.renderNetworkEntry('kovan')}
-        {this.renderNetworkEntry('rinkeby')}
-        {this.renderNetworkEntry('goerli')}
+        {this.renderNetworkEntry('theta_mainnet')}
+        {this.renderNetworkEntry('mainnet')} 
 
         {this.renderCustomRpcList(rpcListDetail, this.props.provider)}
         <DropdownMenuItem

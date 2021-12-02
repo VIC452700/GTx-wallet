@@ -11,6 +11,7 @@ import {
 import ColorIndicator from '../../../components/ui/color-indicator';
 import { COLORS, SIZES } from '../../../helpers/constants/design-system';
 import NetworkForm from './network-form';
+//import * as Network from '../../../../shared/constants/network';
 
 export default class NetworksTab extends PureComponent {
   static contextTypes = {
@@ -85,6 +86,8 @@ export default class NetworksTab extends PureComponent {
       labelKey,
       rpcUrl,
       providerType: currentProviderType,
+      //chainId,
+      viewOnly,
     } = network;
 
     const listItemNetworkIsSelected = selectRpcUrl && selectRpcUrl === rpcUrl;
@@ -97,6 +100,8 @@ export default class NetworksTab extends PureComponent {
       (listItemUrlIsProviderUrl || listItemTypeIsProviderNonRpcType);
     const displayNetworkListItemAsSelected =
       listItemNetworkIsSelected || listItemNetworkIsCurrentProvider;
+    //const isRestrictedRpc = currentProviderType === NETWORK_TYPE_RPC && rpcUrl === Network.THETAMAINNET_RPC_URL;
+    //if (currentProviderType !== NETWORK_TYPE_RPC && chainId !== '0x1') return;
 
     return (
       <div
@@ -118,13 +123,13 @@ export default class NetworksTab extends PureComponent {
         <div
           className={classnames('networks-tab__networks-list-name', {
             'networks-tab__networks-list-name--selected': displayNetworkListItemAsSelected,
-            'networks-tab__networks-list-name--disabled':
-              currentProviderType !== NETWORK_TYPE_RPC &&
-              !displayNetworkListItemAsSelected,
+            'networks-tab__networks-list-name--disabled': viewOnly
+              //(currentProviderType !== NETWORK_TYPE_RPC || isRestrictedRpc) && !displayNetworkListItemAsSelected,
           })}
         >
           {label || this.context.t(labelKey)}
-          {currentProviderType !== NETWORK_TYPE_RPC && (
+          {//(currentProviderType !== NETWORK_TYPE_RPC || isRestrictedRpc) && (
+            viewOnly && (
             <LockIcon width="14px" height="17px" fill="#cdcdcd" />
           )}
         </div>
@@ -196,6 +201,8 @@ export default class NetworksTab extends PureComponent {
       isFullScreen,
       shouldRenderNetworkForm,
     } = this.props;
+    //const viewOnlyEx = viewOnly || rpcUrl === Network.THETAMAINNET_RPC_URL;
+    //const blockExplorerUrlEx = blockExplorerUrl || rpcUrl !== Network.THETAMAINNET_RPC_URL ? blockExplorerUrl : Network.THETAMAINNET_EXPLORER_URL;
 
     return (
       <>

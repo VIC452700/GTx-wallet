@@ -45,8 +45,8 @@ log.setDefaultLevel(process.env.METAMASK_DEBUG ? 'debug' : 'warn');
 
 // setup background connection
 const metamaskStream = new WindowPostMessageStream({
-  name: 'metamask-inpage',
-  target: 'metamask-contentscript',
+  name: 'gtxwallet-inpage',
+  target: 'gtxwallet-contentscript',
 });
 
 initializeProvider({

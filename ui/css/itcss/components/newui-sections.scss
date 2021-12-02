@@ -22,7 +22,7 @@ $sub-mid-size-breakpoint-range: "screen and (min-width: #{$break-large}) and (ma
   left: 0;
   width: 1px;
   height: 1px;
-  background-color: $Grey-000;
+  background-color: $BG;
   animation: emptySpinningDiv 1s infinite linear;
 }
 
@@ -41,6 +41,7 @@ $sub-mid-size-breakpoint-range: "screen and (min-width: #{$break-large}) and (ma
 }
 
 .main-container-wrapper {
+  background: $BG;
   display: flex;
   justify-content: center;
   flex: 1 0 auto;

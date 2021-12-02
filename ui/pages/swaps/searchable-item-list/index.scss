@@ -68,7 +68,7 @@
 
     &:hover,
     &:focus {
-      background: $Grey-000;
+      background: $BG;
     }
 
     &--selected {
@@ -202,7 +202,7 @@
   }
 
   &__item--highlighted {
-    background: $Grey-000;
+    background: $BG;
   }
 
   &__identicon {

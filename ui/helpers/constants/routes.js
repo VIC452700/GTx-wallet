@@ -2,6 +2,7 @@ const DEFAULT_ROUTE = '/';
 const UNLOCK_ROUTE = '/unlock';
 const LOCK_ROUTE = '/lock';
 const ASSET_ROUTE = '/asset';
+const NFT_ROUTE = '/nft';
 const SETTINGS_ROUTE = '/settings';
 const GENERAL_ROUTE = '/settings/general';
 const ADVANCED_ROUTE = '/settings/advanced';
@@ -70,6 +71,7 @@ const PATH_NAME_MAP = {
   [UNLOCK_ROUTE]: 'Unlock Page',
   [LOCK_ROUTE]: 'Lock Page',
   [`${ASSET_ROUTE}/:asset`]: `Asset Page`,
+  [`${NFT_ROUTE}/:asset`]: `NFT Page`,
   [SETTINGS_ROUTE]: 'Settings Page',
   [GENERAL_ROUTE]: 'General Settings Page',
   [ADVANCED_ROUTE]: 'Advanced Settings Page',
@@ -137,6 +139,7 @@ export {
   DEFAULT_ROUTE,
   ALERTS_ROUTE,
   ASSET_ROUTE,
+  NFT_ROUTE,
   UNLOCK_ROUTE,
   LOCK_ROUTE,
   SETTINGS_ROUTE,

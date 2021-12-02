@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import {
   NETWORK_TYPE_RPC,
   NETWORK_TYPE_TO_ID_MAP,
+  THETAMAINNET_CHAIN_ID,
 } from '../../../../shared/constants/network';
 
 import LoadingIndicator from '../../ui/loading-indicator';
@@ -17,6 +18,7 @@ import {
 import Chip from '../../ui/chip/chip';
 import { useI18nContext } from '../../../hooks/useI18nContext';
 import { isNetworkLoading } from '../../../selectors';
+import state from '../../../../.storybook/test-data';
 
 export default function NetworkDisplay({
   colored,
@@ -28,14 +30,19 @@ export default function NetworkDisplay({
   targetNetwork,
   onClick,
 }) {
+  let provider;
   const networkIsLoading = useSelector(isNetworkLoading);
-  const currentNetwork = useSelector((state) => ({
-    nickname: state.metamask.provider.nickname,
-    type: state.metamask.provider.type,
-  }));
+  const currentNetwork = useSelector((state) => {
+    provider = state.metamask.provider;
+    return ({
+      nickname: state.metamask.provider.nickname,
+      type: state.metamask.provider.type,
+      //chainId: state.metamask.provider.chainId,
+    })
+  });
   const t = useI18nContext();
 
-  const { nickname: networkNickname, type: networkType } =
+  const { nickname: networkNickname, type: networkType /*, chainId: string*/ } =
     targetNetwork ?? currentNetwork;
 
   return (
@@ -49,11 +56,13 @@ export default function NetworkDisplay({
           isLoading={networkIsLoading}
         >
           <ColorIndicator
-            color={networkType === NETWORK_TYPE_RPC ? COLORS.UI4 : networkType}
+            color={networkType === NETWORK_TYPE_RPC || (!targetNetwork && provider.chainId === THETAMAINNET_CHAIN_ID) 
+              ? (!targetNetwork && provider.chainId === THETAMAINNET_CHAIN_ID ? COLORS.THETAMAINNET : COLORS.UI4)
+              : networkType}
             size={indicatorSize}
             type={ColorIndicator.TYPES.FILLED}
             iconClassName={
-              networkType === NETWORK_TYPE_RPC && indicatorSize !== SIZES.XS
+              networkType === NETWORK_TYPE_RPC && (targetNetwork || provider.chainId !== THETAMAINNET_CHAIN_ID) && indicatorSize !== SIZES.XS
                 ? 'fa fa-question'
                 : undefined
             }

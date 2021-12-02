@@ -425,7 +425,7 @@ export default class PreferencesController {
     } else {
       tokens.push(newEntry);
     }
-    assetImages[address] = image;
+    assetImages[address] = assetImages[address] && !image ? assetImages[address] : image;
     this._updateAccountTokens(tokens, assetImages, updatedHiddenTokens);
     return Promise.resolve(tokens);
   }

@@ -7,6 +7,7 @@ import {
   TEST_CHAINS,
   NETWORK_TYPE_RPC,
   NATIVE_CURRENCY_TOKEN_IMAGE_MAP,
+  THETAMAINNET_CHAIN_ID,
 } from '../../shared/constants/network';
 
 import {
@@ -427,6 +428,8 @@ export function getDomainMetadata(state) {
 
 export function getRpcPrefsForCurrentProvider(state) {
   const { frequentRpcListDetail, provider } = state.metamask;
+  if (provider.chainId===THETAMAINNET_CHAIN_ID) return provider.rpcPrefs;
+
   const selectRpcInfo = frequentRpcListDetail.find(
     (rpcInfo) => rpcInfo.rpcUrl === provider.rpcUrl,
   );

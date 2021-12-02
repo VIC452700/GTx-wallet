@@ -4,10 +4,16 @@
 
   .app-header__logo-container {
     width: 742px;
-    margin-top: 3%;
+    /*margin-top: 3%;*/
+
+    position: static;
+    padding: 1rem;
+    width: 80px;
+    margin-left: auto;
+    margin-right: auto;
 
     @media screen and (max-width: $break-small) {
-      width: 100%;
+      /*width: 100%;*/
     }
   }
 

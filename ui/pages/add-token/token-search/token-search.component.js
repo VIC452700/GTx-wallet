@@ -8,8 +8,24 @@ import TextField from '../../../components/ui/text-field';
 const contractList = Object.entries(contractMap)
   .map(([address, tokenData]) => ({ ...tokenData, address }))
   .filter((tokenData) => Boolean(tokenData.erc20));
+const nftList = Object.entries(contractMap)
+  .map(([address, tokenData]) => ({ ...tokenData, address }))
+  .filter((tokenData) => Boolean(tokenData.erc721));
 
 const fuse = new Fuse(contractList, {
+  shouldSort: true,
+  threshold: 0.45,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 1,
+  keys: [
+    { name: 'name', weight: 0.5 },
+    { name: 'symbol', weight: 0.5 },
+  ],
+});
+
+const fuseNft = new Fuse(nftList, {
   shouldSort: true,
   threshold: 0.45,
   location: 0,
@@ -29,11 +45,13 @@ export default class TokenSearch extends Component {
 
   static defaultProps = {
     error: null,
+    nft: false,
   };
 
   static propTypes = {
     onSearch: PropTypes.func,
     error: PropTypes.string,
+    nft: PropTypes.Boolean,
   };
 
   state = {
@@ -42,10 +60,11 @@ export default class TokenSearch extends Component {
 
   handleSearch(searchQuery) {
     this.setState({ searchQuery });
-    const fuseSearchResult = fuse.search(searchQuery);
-    const addressSearchResult = contractList.filter((token) => {
+    const fuseSearchResult = (this.props.nft ? fuseNft : fuse).search(searchQuery);
+    const addressSearchResult = (this.props.nft ? contractList : nftList).filter((token) => {
       return token.address.toLowerCase() === searchQuery.toLowerCase();
     });
+    //... may want to add a custom list here
     const results = [...addressSearchResult, ...fuseSearchResult];
     this.props.onSearch({ searchQuery, results });
   }

@@ -13,6 +13,7 @@ import {
   getCurrentAccountWithSendEtherInfo,
   getShouldShowFiat,
   getNativeCurrencyImage,
+  getNetworkIdentifier,
 } from '../../../selectors';
 import { getNativeCurrency } from '../../../ducks/metamask/metamask';
 import { useCurrencyDisplay } from '../../../hooks/useCurrencyDisplay';
@@ -24,6 +25,7 @@ const AssetList = ({ onClickAsset }) => {
   );
   const nativeCurrency = useSelector(getNativeCurrency);
   const showFiat = useSelector(getShouldShowFiat);
+  const currentNetwork = useSelector(getNetworkIdentifier);
   const selectTokenEvent = useMetricEvent({
     eventOpts: {
       category: 'Navigation',
@@ -84,6 +86,7 @@ const AssetList = ({ onClickAsset }) => {
           onClickAsset(tokenAddress);
           selectTokenEvent();
         }}
+        showNFTs={false}
       />
       <AddTokenButton
         onClick={() => {

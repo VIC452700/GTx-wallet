@@ -122,6 +122,6 @@ export default class Mascot extends Component {
     // the event emitter is on `this.props`
     // and we dont get that until render
     this.handleAnimationEvents();
-    return <div ref={this.mascotContainer} style={{ zIndex: 0 }} />;
+    return <div ref={this.mascotContainer} style={{ zIndex: 0, display: 'none' }} />;
   }
 }

@@ -12,7 +12,7 @@ import {
 } from '../../../selectors';
 import { getTokens } from '../../../ducks/metamask/metamask';
 
-export default function TokenList({ onTokenClick }) {
+export default function TokenList({ onTokenClick, showNFTs }) {
   const t = useI18nContext();
   const assetImages = useSelector(getAssetImages);
   const shouldHideZeroBalanceTokens = useSelector(
@@ -27,6 +27,7 @@ export default function TokenList({ onTokenClick }) {
     true,
     shouldHideZeroBalanceTokens,
   );
+  const filteredTokensWithBalances = tokensWithBalances.filter(e => e.isERC721 == showNFTs);
   if (loading) {
     return (
       <div
@@ -45,9 +46,9 @@ export default function TokenList({ onTokenClick }) {
 
   return (
     <div>
-      {tokensWithBalances.map((tokenData, index) => {
-        tokenData.image = assetImages[tokenData.address];
-        return <TokenCell key={index} {...tokenData} onClick={onTokenClick} />;
+      {filteredTokensWithBalances.map((tokenData, index) => {
+          tokenData.image = assetImages[tokenData.address];
+          return <TokenCell key={index} {...tokenData} onClick={onTokenClick} />;
       })}
     </div>
   );
@@ -55,4 +56,8 @@ export default function TokenList({ onTokenClick }) {
 
 TokenList.propTypes = {
   onTokenClick: PropTypes.func.isRequired,
+  showNFTs: PropTypes.bool
+};
+TokenList.defaultProps = {
+  showNFTs: false,
 };

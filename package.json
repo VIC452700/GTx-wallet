@@ -1,11 +1,7 @@
 {
-  "name": "metamask-crx",
-  "version": "10.0.2",
+  "name": "gtxwallet-crx",
+  "version": "1.0.0.1002",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/MetaMask/metamask-extension.git"
-  },
   "scripts": {
     "setup": "yarn install && yarn setup:postinstall",
     "setup:postinstall": "yarn patch-package && yarn allow-scripts",

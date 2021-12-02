@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import { formatDate } from '../../helpers/utils/util';
 import AssetList from '../../components/app/asset-list';
+import NFTList from '../../components/app/nft-list';
 import HomeNotification from '../../components/app/home-notification';
 import MultipleNotifications from '../../components/app/multiple-notifications';
 import TransactionList from '../../components/app/transaction-list';
@@ -16,8 +17,12 @@ import { EthOverview } from '../../components/app/wallet-overview';
 import WhatsNewPopup from '../../components/app/whats-new-popup';
 import RecoveryPhraseReminder from '../../components/app/recovery-phrase-reminder';
 
+import * as actions from '../../store/actions';
+import * as Network from '../../../shared/constants/network';
+
 import {
   ASSET_ROUTE,
+  NFT_ROUTE,
   RESTORE_VAULT_ROUTE,
   CONFIRM_TRANSACTION_ROUTE,
   CONFIRM_ADD_SUGGESTED_TOKEN_ROUTE,
@@ -32,11 +37,13 @@ import {
 } from '../../helpers/constants/routes';
 
 const LEARN_MORE_URL =
-  'https://metamask.zendesk.com/hc/en-us/articles/360045129011-Intro-to-MetaMask-v8-extension';
+  'https://docs.gtx.io/en-us/articles/360045129011-Intro-to-MetaMask-v8-extension';
 const LEGACY_WEB3_URL =
-  'https://metamask.zendesk.com/hc/en-us/articles/360053147012';
+  'https://docs.gtx.io/en-us/articles/360053147012';
 const INFURA_BLOCKAGE_URL =
-  'https://metamask.zendesk.com/hc/en-us/articles/360059386712';
+  'https://docs.gtx.io/en-us/articles/360059386712';
+
+let _firstRender = true;
 
 export default class Home extends PureComponent {
   static contextTypes = {
@@ -349,7 +356,7 @@ export default class Home extends PureComponent {
       return null;
     }
 
-    const showWhatsNew = notificationsToShow && showWhatsNewPopup;
+    const showWhatsNew = false && notificationsToShow && showWhatsNewPopup;
 
     return (
       <div className="main-container">
@@ -395,13 +402,25 @@ export default class Home extends PureComponent {
               <Tab
                 activeClassName="home__tab--active"
                 className="home__tab"
+                data-testid="home__nft-tab"
+                name={t('NFTs')}
+              >
+                <NFTList
+                  onClickAsset={(asset) =>
+                    history.push(`${NFT_ROUTE}/${asset}`)
+                  }
+                />
+              </Tab>
+              <Tab
+                activeClassName="home__tab--active"
+                className="home__tab"
                 data-testid="home__activity-tab"
                 name={t('activity')}
               >
                 <TransactionList />
               </Tab>
             </Tabs>
-            <div className="home__support">
+            {/*<div className="home__support">
               {t('needHelp', [
                 <a
                   href="https://support.metamask.io"
@@ -412,7 +431,7 @@ export default class Home extends PureComponent {
                   {t('needHelpLinkText')}
                 </a>,
               ])}
-            </div>
+            </div>*/}
           </div>
 
           {this.renderNotifications()}
@@ -420,4 +439,4 @@ export default class Home extends PureComponent {
       </div>
     );
   }
-}
+} //... alter above support URL

@@ -158,7 +158,7 @@
     "description": "The description of the application"
   },
   "appName": {
-    "message": "MetaMask",
+    "message": "GTx Wallet",
     "description": "The name of the application"
   },
   "approvalAndAggregatorTxFeeCost": {
@@ -188,6 +188,9 @@
   },
   "assets": {
     "message": "Aset"
+  },
+  "NFTs": {
+    "message": "NFTs"
   },
   "attemptToCancel": {
     "message": "Coba Membatalkan?"
@@ -392,6 +395,9 @@
   },
   "connectingToMainnet": {
     "message": "Menghubungkan ke Ethereum Mainnet"
+  },
+  "connectingToThetaMainnet": {
+    "message": "Menghubungkan ke Theta Mainnet"
   },
   "connectingToRinkeby": {
     "message": "Menghubungkan ke Jaringan Uji Rinkeby"

@@ -35,7 +35,7 @@ function getActionFunctionById(id, history) {
     5: () => {
       updateViewedNotifications({ 5: true });
       global.platform.openTab({
-        url: 'https://metamask.zendesk.com/hc/en-us/articles/360060826432',
+        url: 'https://docs.gtx.io/en-us/articles/360060826432',
       });
     },
   };

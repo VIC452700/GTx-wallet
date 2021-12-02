@@ -7,6 +7,8 @@ import QrView from '../../../ui/qr-code';
 import EditableLabel from '../../../ui/editable-label';
 import Button from '../../../ui/button';
 
+import { THETAMAINNET_CHAIN_ID } from '../../../../../shared/constants/network';
+
 export default class AccountDetailsModal extends Component {
   static propTypes = {
     selectedIdentity: PropTypes.object,
@@ -81,10 +83,12 @@ export default class AccountDetailsModal extends Component {
           }}
         >
           {rpcPrefs.blockExplorerUrl
-            ? this.context.t('blockExplorerView', [
-                rpcPrefs.blockExplorerUrl.match(/^https?:\/\/(.+)/u)[1],
-              ])
-            : this.context.t('viewOnEtherscan')}
+            ? (chainId===THETAMAINNET_CHAIN_ID 
+                ? this.context.t('viewOnThetaExplorer') 
+                : this.context.t('blockExplorerView', [
+                  rpcPrefs.blockExplorerUrl.match(/^https?:\/\/(.+)/u)[1],
+                ])
+            ) : this.context.t('viewOnEtherscan')}
         </Button>
 
         {exportPrivateKeyFeatureEnabled ? (
